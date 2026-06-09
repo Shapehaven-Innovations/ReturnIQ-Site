@@ -1,0 +1,1036 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      ReturnIQ — AI return analytics for Shopify | Know why products come back
+    </title>
+    <meta
+      name="description"
+      content="ReturnIQ turns your Shopify return data into a clear diagnosis: which products are most at risk, the real reasons behind every return, and the repeat returners draining your margin. Free plan available."
+    />
+    <link rel="canonical" href="https://returniq.shapehaveninnovations.com/" />
+    <link rel="icon" href="assets/icon.png" />
+
+    <!-- Open Graph / Twitter -->
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:title"
+      content="ReturnIQ — Know why products come back, before they eat your margin"
+    />
+    <meta
+      property="og:description"
+      content="AI return analytics for Shopify. Diagnose the real reasons behind returns, risk-score every product, and catch repeat returners."
+    />
+    <meta
+      property="og:url"
+      content="https://returniq.shapehaveninnovations.com/"
+    />
+    <meta
+      property="og:image"
+      content="https://returniq.shapehaveninnovations.com/assets/dashboard.png"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Performance: preconnect to asset + font origins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Structured data for Google + AI answer engines (no fabricated ratings) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "ReturnIQ",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Shopify",
+        "description": "AI return analytics for Shopify. Diagnose the real reasons behind returns, risk-score every product, and detect repeat returners and fraud.",
+        "url": "https://apps.shopify.com/returniq",
+        "publisher": {
+          "@type": "Organization",
+          "name": "ShapeHaven Innovations",
+          "url": "https://shapehaveninnovations.com/"
+        },
+        "offers": [
+          {
+            "@type": "Offer",
+            "name": "Free",
+            "price": "0",
+            "priceCurrency": "USD"
+          },
+          {
+            "@type": "Offer",
+            "name": "Growth",
+            "price": "29",
+            "priceCurrency": "USD"
+          },
+          {
+            "@type": "Offer",
+            "name": "Pro",
+            "price": "79",
+            "priceCurrency": "USD"
+          },
+          {
+            "@type": "Offer",
+            "name": "Scale",
+            "price": "149",
+            "priceCurrency": "USD"
+          }
+        ]
+      }
+    </script>
+
+    <style>
+      :root {
+        --ink: #14181c;
+        --ink-soft: #4a5650;
+        --muted: #6f7b75;
+        --bg: #fbfcfb;
+        --surface: #ffffff;
+        --line: #e3e8e3;
+        --emerald: #0b6e4f;
+        --emerald-deep: #084d38;
+        --mint: #e9f4ee;
+        --mint-line: #cbe4d6;
+        --risk: #bb421d;
+        --risk-tint: #fbe8e1;
+        --r: 14px;
+        --maxw: 1120px;
+        --shadow:
+          0 1px 2px rgba(20, 24, 28, 0.04),
+          0 12px 32px -16px rgba(11, 77, 56, 0.22);
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        font-family:
+          "IBM Plex Sans",
+          system-ui,
+          -apple-system,
+          sans-serif;
+        color: var(--ink);
+        background: var(--bg);
+        line-height: 1.65;
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+      }
+      img {
+        max-width: 100%;
+        display: block;
+      }
+      a {
+        color: inherit;
+      }
+      .wrap {
+        max-width: var(--maxw);
+        margin: 0 auto;
+        padding: 0 24px;
+      }
+      .eyebrow {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.74rem;
+        font-weight: 500;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--emerald);
+      }
+      h1,
+      h2,
+      h3 {
+        font-family: "Space Grotesk", sans-serif;
+        font-weight: 700;
+        line-height: 1.06;
+        letter-spacing: -0.02em;
+      }
+      h1 {
+        font-size: clamp(2.3rem, 5.4vw, 4rem);
+      }
+      h2 {
+        font-size: clamp(1.85rem, 3.6vw, 2.7rem);
+      }
+      h3 {
+        font-size: 1.18rem;
+        letter-spacing: -0.01em;
+      }
+      p.lead {
+        font-size: clamp(1.05rem, 1.6vw, 1.22rem);
+        color: var(--ink-soft);
+        max-width: 40ch;
+      }
+
+      /* Buttons */
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.55em;
+        font-weight: 600;
+        font-size: 1rem;
+        padding: 0.85em 1.4em;
+        border-radius: 11px;
+        text-decoration: none;
+        border: 1px solid transparent;
+        transition:
+          transform 0.15s ease,
+          background 0.15s ease,
+          box-shadow 0.15s ease;
+        cursor: pointer;
+      }
+      .btn--primary {
+        background: var(--emerald);
+        color: #fff;
+        box-shadow: var(--shadow);
+      }
+      .btn--primary:hover {
+        background: var(--emerald-deep);
+        transform: translateY(-1px);
+      }
+      .btn--ghost {
+        background: transparent;
+        color: var(--ink);
+        border-color: var(--line);
+      }
+      .btn--ghost:hover {
+        border-color: var(--emerald);
+        color: var(--emerald-deep);
+      }
+      .btn svg {
+        width: 1.05em;
+        height: 1.05em;
+      }
+      :focus-visible {
+        outline: 3px solid var(--emerald);
+        outline-offset: 2px;
+        border-radius: 6px;
+      }
+
+      /* Header */
+      header.site {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        background: rgba(251, 252, 251, 0.82);
+        backdrop-filter: saturate(140%) blur(10px);
+        border-bottom: 1px solid var(--line);
+      }
+      .site .bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 64px;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 0.6em;
+        font-family: "Space Grotesk";
+        font-weight: 700;
+        font-size: 1.15rem;
+        text-decoration: none;
+        letter-spacing: -0.01em;
+      }
+      .brand img {
+        width: 30px;
+        height: 30px;
+        border-radius: 8px;
+      }
+      .nav {
+        display: flex;
+        align-items: center;
+        gap: 28px;
+      }
+      .nav a.lnk {
+        text-decoration: none;
+        color: var(--ink-soft);
+        font-size: 0.95rem;
+        font-weight: 500;
+      }
+      .nav a.lnk:hover {
+        color: var(--ink);
+      }
+      @media (max-width: 720px) {
+        .nav .lnk {
+          display: none;
+        }
+      }
+
+      /* Hero */
+      .hero {
+        padding: clamp(56px, 9vw, 104px) 0 clamp(40px, 6vw, 72px);
+      }
+      .hero .grid {
+        display: grid;
+        grid-template-columns: 1.05fr 0.95fr;
+        gap: clamp(32px, 5vw, 64px);
+        align-items: center;
+      }
+      .hero h1 {
+        margin: 0.5em 0 0.45em;
+      }
+      .hero .cta-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+        margin: 1.8em 0 1.3em;
+      }
+      .trust {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.82rem;
+        color: var(--muted);
+        letter-spacing: 0.01em;
+      }
+      .trust b {
+        color: var(--emerald-deep);
+        font-weight: 500;
+      }
+      .shot-frame {
+        border: 1px solid var(--line);
+        border-radius: var(--r);
+        overflow: hidden;
+        background: var(--surface);
+        box-shadow: var(--shadow);
+        position: relative;
+      }
+      .shot-frame .chrome {
+        display: flex;
+        gap: 6px;
+        padding: 11px 14px;
+        border-bottom: 1px solid var(--line);
+        background: #f4f6f4;
+      }
+      .shot-frame .chrome i {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: #d7ddd8;
+        display: block;
+      }
+      .shot-frame img {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 1600/900;
+        object-fit: cover;
+      }
+      @media (max-width: 860px) {
+        .hero .grid {
+          grid-template-columns: 1fr;
+        }
+        .hero .shot-frame {
+          order: -1;
+        }
+      }
+
+      /* Generic section rhythm */
+      .sec {
+        padding: clamp(56px, 8vw, 96px) 0;
+      }
+      .sec--mint {
+        background: linear-gradient(180deg, #fff, #f4f9f6);
+        border-top: 1px solid var(--line);
+        border-bottom: 1px solid var(--line);
+      }
+      .sec-head {
+        max-width: 46ch;
+      }
+      .sec-head h2 {
+        margin: 0.35em 0 0.4em;
+      }
+      .sec-head p {
+        color: var(--ink-soft);
+      }
+
+      /* Problem callout */
+      .problem p {
+        font-size: clamp(1.1rem, 2vw, 1.4rem);
+        max-width: 30ch;
+        color: var(--ink);
+        font-weight: 500;
+      }
+      .problem .body {
+        color: var(--ink-soft);
+        font-size: 1.06rem;
+        max-width: 56ch;
+        font-weight: 400;
+        margin-top: 1em;
+      }
+
+      /* Feature rows */
+      .feature {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: clamp(28px, 4vw, 60px);
+        align-items: center;
+        padding: clamp(34px, 5vw, 58px) 0;
+      }
+      .feature + .feature {
+        border-top: 1px solid var(--line);
+      }
+      .feature:nth-child(even) .ftxt {
+        order: 2;
+      }
+      .feature .badge {
+        display: inline-block;
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.7rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        padding: 0.32em 0.7em;
+        border-radius: 7px;
+        margin-bottom: 1em;
+      }
+      .badge--emerald {
+        background: var(--mint);
+        color: var(--emerald-deep);
+        border: 1px solid var(--mint-line);
+      }
+      .badge--risk {
+        background: var(--risk-tint);
+        color: var(--risk);
+        border: 1px solid #f2cbbd;
+      }
+      .feature h3 {
+        margin-bottom: 0.5em;
+      }
+      .feature p {
+        color: var(--ink-soft);
+      }
+      @media (max-width: 760px) {
+        .feature {
+          grid-template-columns: 1fr;
+        }
+        .feature:nth-child(even) .ftxt {
+          order: 0;
+        }
+      }
+
+      /* Steps */
+      .steps {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+        margin-top: 48px;
+        counter-reset: s;
+      }
+      .step {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: var(--r);
+        padding: 28px;
+      }
+      .step::before {
+        counter-increment: s;
+        content: "0" counter(s);
+        font-family: "IBM Plex Mono", monospace;
+        color: var(--emerald);
+        font-size: 0.9rem;
+        letter-spacing: 0.1em;
+        display: block;
+        margin-bottom: 1em;
+      }
+      .step h3 {
+        font-size: 1.06rem;
+        margin-bottom: 0.35em;
+      }
+      .step p {
+        color: var(--ink-soft);
+        font-size: 0.97rem;
+      }
+      @media (max-width: 760px) {
+        .steps {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* Demo video facade */
+      .video {
+        position: relative;
+        border-radius: var(--r);
+        overflow: hidden;
+        border: 1px solid var(--line);
+        box-shadow: var(--shadow);
+        background: #0b1410;
+        aspect-ratio: 16/9;
+        margin-top: 40px;
+        cursor: pointer;
+      }
+      .video img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0.92;
+      }
+      .video .play {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 0;
+        background: transparent;
+        cursor: pointer;
+        width: 100%;
+      }
+      .video .play span {
+        width: 78px;
+        height: 78px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.95);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+        transition: transform 0.15s ease;
+      }
+      .video .play:hover span {
+        transform: scale(1.06);
+      }
+      .video .play svg {
+        width: 30px;
+        height: 30px;
+        margin-left: 4px;
+        fill: var(--emerald-deep);
+      }
+      .video iframe {
+        width: 100%;
+        height: 100%;
+        border: 0;
+      }
+
+      /* Pricing */
+      .tiers {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 18px;
+        margin-top: 48px;
+      }
+      .tier {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: var(--r);
+        padding: 26px 22px;
+        display: flex;
+        flex-direction: column;
+      }
+      .tier.is-feature {
+        border-color: var(--emerald);
+        box-shadow: var(--shadow);
+      }
+      .tier .name {
+        font-family: "Space Grotesk";
+        font-weight: 700;
+        font-size: 1.1rem;
+      }
+      .tier .price {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 1.7rem;
+        margin: 0.3em 0 0.1em;
+      }
+      .tier .price small {
+        font-size: 0.8rem;
+        color: var(--muted);
+        font-weight: 500;
+      }
+      .tier .tag {
+        font-size: 0.78rem;
+        color: var(--emerald-deep);
+        font-weight: 600;
+        min-height: 1.2em;
+      }
+      .tier ul {
+        list-style: none;
+        margin: 1.1em 0 1.4em;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5em;
+      }
+      .tier li {
+        font-size: 0.92rem;
+        color: var(--ink-soft);
+        padding-left: 1.3em;
+        position: relative;
+      }
+      .tier li::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0.55em;
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--emerald);
+      }
+      .tier .btn {
+        margin-top: auto;
+        justify-content: center;
+        width: 100%;
+      }
+      @media (max-width: 900px) {
+        .tiers {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (max-width: 520px) {
+        .tiers {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* Final CTA */
+      .final {
+        text-align: center;
+        padding: clamp(64px, 9vw, 112px) 0;
+      }
+      .final h2 {
+        max-width: 18ch;
+        margin: 0.4em auto 0.7em;
+      }
+      .final p {
+        color: var(--ink-soft);
+        max-width: 48ch;
+        margin: 0 auto 1.6em;
+      }
+
+      /* Footer */
+      footer.site {
+        border-top: 1px solid var(--line);
+        padding: 36px 0;
+        background: var(--surface);
+      }
+      footer .row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        justify-content: space-between;
+        align-items: center;
+      }
+      footer a {
+        color: var(--ink-soft);
+        text-decoration: none;
+        font-size: 0.92rem;
+      }
+      footer a:hover {
+        color: var(--emerald-deep);
+      }
+      .foot-links {
+        display: flex;
+        gap: 22px;
+        flex-wrap: wrap;
+      }
+      .copy {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.8rem;
+        color: var(--muted);
+      }
+
+      /* Reveal (additive: content visible by default; only animates when JS+motion ok) */
+      .js .reveal {
+        opacity: 0;
+        transform: translateY(14px);
+        transition:
+          opacity 0.6s ease,
+          transform 0.6s ease;
+      }
+      .js .reveal.in {
+        opacity: 1;
+        transform: none;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .js .reveal {
+          opacity: 1;
+          transform: none;
+          transition: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site">
+      <div class="wrap bar">
+        <a class="brand" href="#top">
+          <img src="assets/icon.png" alt="" width="30" height="30" />
+          ReturnIQ
+        </a>
+        <nav class="nav">
+          <a class="lnk" href="#features">Features</a>
+          <a class="lnk" href="#how">How it works</a>
+          <a class="lnk" href="#pricing">Pricing</a>
+          <a class="btn btn--primary" href="https://apps.shopify.com/returniq"
+            >Get it on Shopify</a
+          >
+        </nav>
+      </div>
+    </header>
+
+    <main id="top">
+      <!-- HERO -->
+      <section class="hero">
+        <div class="wrap grid">
+          <div class="reveal">
+            <span class="eyebrow">AI return analytics for Shopify</span>
+            <h1>
+              Find out why products come back — before they eat your margin.
+            </h1>
+            <p class="lead">
+              ReturnIQ turns your Shopify return data into a clear diagnosis:
+              which products are most at risk, the real reasons behind every
+              return, and the repeat returners quietly draining your profit.
+            </p>
+            <div class="cta-row">
+              <a
+                class="btn btn--primary"
+                href="https://apps.shopify.com/returniq"
+              >
+                Get ReturnIQ on Shopify
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.2"
+                >
+                  <path d="M5 12h14M13 6l6 6-6 6" />
+                </svg>
+              </a>
+              <a class="btn btn--ghost" href="#demo">Watch the 60-sec demo</a>
+            </div>
+            <p class="trust">
+              Free plan available · <b>30-day Pro trial</b> · Works with your
+              existing Shopify orders
+            </p>
+          </div>
+          <div class="shot-frame reveal">
+            <div class="chrome"><i></i><i></i><i></i></div>
+            <img
+              src="assets/dashboard.png"
+              alt="ReturnIQ dashboard showing return metrics and charts"
+              width="1600"
+              height="900"
+            />
+          </div>
+        </div>
+      </section>
+
+      <!-- PROBLEM -->
+      <section class="sec sec--mint problem">
+        <div class="wrap reveal">
+          <span class="eyebrow">The blind spot</span>
+          <p style="margin-top: 0.6em">
+            Most stores know their return rate. Almost none know <em>why</em>.
+          </p>
+          <p class="body">
+            A refund tells you a sale reversed. It doesn't tell you the sizing
+            ran small, the photos oversold the color, or that the same handful
+            of customers send back half of what they buy. That "why" is exactly
+            where your margin goes — and it's already sitting in data you have.
+          </p>
+        </div>
+      </section>
+
+      <!-- FEATURES -->
+      <section class="sec" id="features">
+        <div class="wrap">
+          <div class="sec-head reveal">
+            <span class="eyebrow">What ReturnIQ does</span>
+            <h2>Stop scanning spreadsheets. Start reading the cause.</h2>
+          </div>
+
+          <div class="feature reveal">
+            <div class="ftxt">
+              <span class="badge badge--emerald">AI insights · Pro</span>
+              <h3>AI insights that name the cause</h3>
+              <p>
+                ReturnIQ reads your return reasons and order history and tells
+                you what's actually driving returns for each product — and what
+                to change, in plain language.
+              </p>
+            </div>
+            <div class="shot-frame">
+              <img
+                loading="lazy"
+                src="assets/ai-insights.png"
+                alt="AI insights showing return reasons and recommendations"
+                width="1600"
+                height="900"
+              />
+            </div>
+          </div>
+
+          <div class="feature reveal">
+            <div class="ftxt">
+              <span class="badge badge--emerald">Risk scoring</span>
+              <h3>A return-risk score on every product</h3>
+              <p>
+                Each product gets a score based on its own return history, so
+                you know exactly where to look first instead of guessing across
+                your whole catalog.
+              </p>
+            </div>
+            <div class="shot-frame">
+              <img
+                loading="lazy"
+                src="assets/dashboard.png"
+                alt="ReturnIQ dashboard with product return metrics"
+                width="1600"
+                height="900"
+              />
+            </div>
+          </div>
+
+          <div class="feature reveal">
+            <div class="ftxt">
+              <span class="badge badge--risk">Fraud detection · Scale</span>
+              <h3>Catch the returns that aren't honest</h3>
+              <p>
+                Spot repeat returners and suspicious patterns — serial refunds,
+                wardrobing — before they quietly erode your margins. Flag,
+                export, and act.
+              </p>
+            </div>
+            <div class="shot-frame">
+              <img
+                loading="lazy"
+                src="assets/returns-fraud.png"
+                alt="Return list with fraud risk badges and CSV export"
+                width="1600"
+                height="900"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- HOW IT WORKS -->
+      <section class="sec sec--mint" id="how">
+        <div class="wrap">
+          <div class="sec-head reveal">
+            <span class="eyebrow">How it works</span>
+            <h2>From raw returns to a clear plan in three steps.</h2>
+          </div>
+          <div class="steps">
+            <div class="step reveal">
+              <h3>Connect your store</h3>
+              <p>
+                Install from the Shopify App Store. ReturnIQ reads your existing
+                orders and returns — nothing to configure.
+              </p>
+            </div>
+            <div class="step reveal">
+              <h3>ReturnIQ analyzes</h3>
+              <p>
+                It clusters return reasons, scores product risk, and surfaces
+                repeat-return and fraud patterns across your catalog.
+              </p>
+            </div>
+            <div class="step reveal">
+              <h3>Act on the diagnosis</h3>
+              <p>
+                Fix the product pages, sizing, or policies behind your worst
+                offenders — and track the right metrics in one dashboard.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- DEMO -->
+      <section class="sec" id="demo">
+        <div class="wrap">
+          <div class="sec-head reveal">
+            <span class="eyebrow">See it in action</span>
+            <h2>A 60-second look at ReturnIQ.</h2>
+          </div>
+          <div class="video reveal" id="player" data-id="D9rPlSMmQME">
+            <img
+              loading="lazy"
+              src="assets/video-thumb.jpg"
+              alt="ReturnIQ product demo video"
+              width="1280"
+              height="720"
+            />
+            <button class="play" aria-label="Play ReturnIQ demo video">
+              <span
+                ><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg
+              ></span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- PRICING -->
+      <section class="sec sec--mint" id="pricing">
+        <div class="wrap">
+          <div class="sec-head reveal">
+            <span class="eyebrow">Pricing</span>
+            <h2>Start free. Upgrade when the savings show up.</h2>
+          </div>
+          <div class="tiers">
+            <div class="tier reveal">
+              <div class="name">Free</div>
+              <div class="price">$0</div>
+              <div class="tag">&nbsp;</div>
+              <ul>
+                <li>Dashboard overview</li>
+                <li>Basic return tracking</li>
+                <li>Standard data sync</li>
+              </ul>
+              <a class="btn btn--ghost" href="https://apps.shopify.com/returniq"
+                >Start free</a
+              >
+            </div>
+            <div class="tier reveal">
+              <div class="name">Growth</div>
+              <div class="price">$29<small>/mo</small></div>
+              <div class="tag">30-day free trial</div>
+              <ul>
+                <li>Return reason clustering</li>
+                <li>CSV export</li>
+                <li>Monthly insights report</li>
+              </ul>
+              <a class="btn btn--ghost" href="https://apps.shopify.com/returniq"
+                >Choose Growth</a
+              >
+            </div>
+            <div class="tier is-feature reveal">
+              <div class="name">Pro</div>
+              <div class="price">$79<small>/mo</small></div>
+              <div class="tag">Most popular</div>
+              <ul>
+                <li>AI return insights</li>
+                <li>Product risk scoring</li>
+                <li>Repeat-return detection</li>
+                <li>Weekly insights email</li>
+              </ul>
+              <a
+                class="btn btn--primary"
+                href="https://apps.shopify.com/returniq"
+                >Choose Pro</a
+              >
+            </div>
+            <div class="tier reveal">
+              <div class="name">Scale</div>
+              <div class="price">$149<small>/mo</small></div>
+              <div class="tag">&nbsp;</div>
+              <ul>
+                <li>Fraud detection</li>
+                <li>Custom return filters</li>
+                <li>Everything in Pro</li>
+              </ul>
+              <a class="btn btn--ghost" href="https://apps.shopify.com/returniq"
+                >Choose Scale</a
+              >
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FINAL CTA -->
+      <section class="final">
+        <div class="wrap reveal">
+          <span class="eyebrow">Your data is already talking</span>
+          <h2>See what your returns have been trying to tell you.</h2>
+          <p>
+            Install ReturnIQ free and get your first return diagnosis today — no
+            code, no credit card to start.
+          </p>
+          <a class="btn btn--primary" href="https://apps.shopify.com/returniq">
+            Get ReturnIQ on Shopify
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.2"
+            >
+              <path d="M5 12h14M13 6l6 6-6 6" />
+            </svg>
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site">
+      <div class="wrap row">
+        <a class="brand" href="#top" style="font-size: 1rem">
+          <img
+            src="assets/icon.png"
+            alt=""
+            width="24"
+            height="24"
+            style="border-radius: 6px"
+          />
+          ReturnIQ
+        </a>
+        <div class="foot-links">
+          <a href="https://apps.shopify.com/returniq">Shopify App Store</a>
+          <a href="https://shapehaveninnovations.com/"
+            >ShapeHaven Innovations</a
+          >
+          <a href="https://shapehaveninnovations.com/returniq-privacy.html"
+            >Privacy policy</a
+          >
+        </div>
+        <div class="copy">© 2026 ShapeHaven Innovations</div>
+      </div>
+    </footer>
+
+    <script>
+      document.documentElement.classList.add("js");
+
+      // Scroll reveal
+      (function () {
+        var els = document.querySelectorAll(".reveal");
+        if (!("IntersectionObserver" in window)) {
+          els.forEach(function (e) {
+            e.classList.add("in");
+          });
+          return;
+        }
+        var io = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (en) {
+              if (en.isIntersecting) {
+                en.target.classList.add("in");
+                io.unobserve(en.target);
+              }
+            });
+          },
+          { rootMargin: "0px 0px -8% 0px", threshold: 0.08 },
+        );
+        els.forEach(function (e) {
+          io.observe(e);
+        });
+      })();
+
+      // YouTube facade: load iframe only on click
+      (function () {
+        var p = document.getElementById("player");
+        if (!p) return;
+        p.addEventListener("click", function () {
+          var id = p.getAttribute("data-id");
+          var f = document.createElement("iframe");
+          f.setAttribute(
+            "allow",
+            "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture",
+          );
+          f.setAttribute("allowfullscreen", "");
+          f.setAttribute("title", "ReturnIQ demo video");
+          f.src =
+            "https://www.youtube.com/embed/" +
+            id +
+            "?autoplay=1&rel=0&modestbranding=1";
+          p.innerHTML = "";
+          p.style.cursor = "default";
+          p.appendChild(f);
+        });
+      })();
+    </script>
+  </body>
+</html>
