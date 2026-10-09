@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopify Return Rate Calculator (Return Rate, Refund Rate, Cost)</title>
+  <meta name="description" content="Free Shopify return rate calculator. Enter orders, returned orders, revenue, refunds and average return cost to get your return rate, refund rate and cost of returns. Runs in your browser.">
+  <link rel="canonical" href="https://returniq.shapehaveninnovations.com/guides/shopify-return-rate-calculator/">
+  <link rel="icon" href="/assets/icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="ReturnIQ">
+  <meta property="og:title" content="Shopify Return Rate Calculator (Return Rate, Refund Rate, Cost)">
+  <meta property="og:description" content="Free Shopify return rate calculator. Enter orders, returned orders, revenue, refunds and average return cost to get your return rate, refund rate and cost of returns. Runs in your browser.">
+  <meta property="og:url" content="https://returniq.shapehaveninnovations.com/guides/shopify-return-rate-calculator/">
+  <meta property="og:image" content="https://returniq.shapehaveninnovations.com/assets/dashboard.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Shopify Return Rate Calculator (Return Rate, Refund Rate, Cost)">
+  <meta name="twitter:description" content="Free Shopify return rate calculator. Enter orders, returned orders, revenue, refunds and average return cost to get your return rate, refund rate and cost of returns. Runs in your browser.">
+  <meta name="twitter:image" content="https://returniq.shapehaveninnovations.com/assets/dashboard.png">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Shopify Return Rate Calculator",
+  "description": "Free Shopify return rate calculator. Enter orders, returned orders, revenue, refunds and average return cost to get your return rate, refund rate and cost of returns. Runs in your browser.",
+  "url": "https://returniq.shapehaveninnovations.com/guides/shopify-return-rate-calculator/",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Any (web browser)",
+  "browserRequirements": "Requires JavaScript",
+  "isAccessibleForFree": true,
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "datePublished": "2026-10-09",
+  "dateModified": "2026-10-09",
+  "image": "https://returniq.shapehaveninnovations.com/assets/dashboard.png",
+  "author": {
+    "@type": "Organization",
+    "name": "ShapeHaven Innovations",
+    "url": "https://shapehaveninnovations.com/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "ShapeHaven Innovations",
+    "url": "https://shapehaveninnovations.com/"
+  }
+}
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root { --bg:#fbfcfb; --text:#14181c; --muted:#5a6660; --line:#e3e8e3; --card:#f3f8f5; --code:#eef2ef; --bar:#ffffff; --link:#0b6e4f; --accent:#0b6e4f; --accent-ink:#ffffff; }
+    * { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
+    body { margin: 0; font-family: "IBM Plex Sans", system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+    a { color: var(--link); }
+    .wrap { max-width: 760px; margin: 0 auto; padding: 0 20px; }
+    .top { border-bottom: 1px solid var(--line); background: var(--bar); }
+    .bar { display: flex; align-items: center; justify-content: space-between; min-height: 60px; }
+    .brand { display: inline-flex; align-items: center; gap: 10px; font-weight: 700; font-size: 1.05rem; color: var(--text); text-decoration: none; }
+    .brand img { border-radius: 7px; }
+    .cta-small { font-size: .9rem; font-weight: 600; text-decoration: none; background: var(--accent); color: var(--accent-ink); padding: 8px 14px; border-radius: 999px; }
+    main { padding-top: 28px; padding-bottom: 56px; }
+    .crumb { font-size: .85rem; color: var(--muted); margin: 0 0 6px; }
+    .crumb a { color: var(--muted); }
+    h1 { font-size: clamp(1.7rem, 4.2vw, 2.4rem); line-height: 1.2; margin: .2em 0 .3em; }
+    h2 { font-size: 1.35rem; line-height: 1.3; margin: 2em 0 .5em; }
+    h3 { font-size: 1.1rem; margin: 1.5em 0 .4em; }
+    p, li { font-size: 1.04rem; }
+    .meta { color: var(--muted); font-size: .9rem; margin-top: 0; }
+    .lead { font-size: 1.15rem; padding: 14px 18px; border-left: 4px solid var(--accent); background: var(--card); border-radius: 0 10px 10px 0; }
+    code, pre { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .92rem; }
+    code { background: var(--code); padding: 2px 6px; border-radius: 5px; }
+    pre { background: var(--code); padding: 14px 16px; border-radius: 10px; overflow-x: auto; line-height: 1.5; }
+    pre code { background: none; padding: 0; }
+    .table-wrap { overflow-x: auto; margin: 1em 0; }
+    table { border-collapse: collapse; width: 100%; font-size: .95rem; }
+    th, td { text-align: left; vertical-align: top; padding: 10px 12px; border-bottom: 1px solid var(--line); }
+    th { background: var(--card); }
+    .note { font-size: .92rem; color: var(--muted); }
+    .callout { background: var(--card); border: 1px solid var(--line); padding: 14px 18px; border-radius: 10px; }
+    .cta-box { margin-top: 2.5em; padding: 22px 24px; background: var(--card); border: 1px solid var(--line); border-radius: 14px; }
+    .cta-box h2 { margin-top: 0; }
+    .btn { display: inline-block; background: var(--accent); color: var(--accent-ink); font-weight: 700; text-decoration: none; padding: 12px 20px; border-radius: 999px; }
+    .foot { border-top: 1px solid var(--line); padding: 26px 0 40px; font-size: .9rem; color: var(--muted); }
+    .foot a { color: var(--muted); margin-right: 14px; }
+    @media (max-width: 520px) { .cta-small { display: none; } }
+    h1, h2, h3 { font-family: "Space Grotesk", "IBM Plex Sans", sans-serif; }
+
+    .calc { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 20px 22px; margin: 1.5em 0; }
+    .calc h2 { margin-top: 0; }
+    .fields { display: grid; grid-template-columns: 1fr 1fr; gap: 16px 20px; }
+    .field label { display: block; font-weight: 600; margin-bottom: 4px; }
+    .field input { width: 100%; font: inherit; font-size: 1rem; padding: 10px 12px; border: 1px solid #8a948f; border-radius: 8px; background: #fff; color: var(--text); min-height: 44px; }
+    .field input:focus-visible, .btn-reset:focus-visible, a:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+    .field input[aria-invalid="true"] { border-color: #b3261e; }
+    .hint { display: block; font-size: .88rem; color: var(--muted); line-height: 1.4; margin-top: 4px; }
+    .err { display: block; font-size: .88rem; color: #b3261e; margin-top: 4px; }
+    .results { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 1.2em 0 0; padding: 0; }
+    .results div { background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; }
+    .results dt { font-size: .9rem; color: var(--muted); }
+    .results dd { margin: 2px 0 0; font-family: "Space Grotesk", "IBM Plex Sans", sans-serif; font-size: 1.5rem; font-weight: 700; overflow-wrap: anywhere; }
+    .btn-reset { font: inherit; font-weight: 600; background: none; border: 1px solid var(--accent); color: var(--accent); padding: 8px 16px; border-radius: 999px; cursor: pointer; margin-top: 16px; min-height: 44px; }
+    .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+    @media (max-width: 600px) { .fields, .results { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <header class="top">
+    <div class="wrap bar">
+      <a class="brand" href="/"><img src="/assets/icon.png" alt="" width="28" height="28">ReturnIQ</a>
+      <a class="cta-small" href="https://apps.shopify.com/returniq">Get it on Shopify</a>
+    </div>
+  </header>
+  <main class="wrap">
+    <article>
+      <p class="crumb"><a href="/">ReturnIQ</a> &rsaquo; Guides</p>
+      <h1>Shopify return rate calculator</h1>
+      <p class="meta">Last updated October 9, 2026</p>
+      <p class="lead">Enter your numbers for any period to get your <strong>return rate</strong>, <strong>refund rate</strong> and the <strong>cost of returns</strong>. Everything is calculated in your browser. Nothing you type is stored, tracked or sent anywhere.</p>
+
+      <form class="calc" id="calc" novalidate aria-labelledby="calc-h">
+        <h2 id="calc-h">Your numbers</h2>
+        <p class="note">Use one period for every field, such as the last 90 days. Use your store currency for the money fields.</p>
+        <div class="fields">
+          <div class="field">
+            <label for="orders">Total orders</label>
+            <input id="orders" name="orders" type="text" inputmode="decimal" autocomplete="off" aria-describedby="orders-h orders-e">
+            <span class="hint" id="orders-h">Orders placed in the period.</span><span class="err" id="orders-e"></span>
+          </div>
+          <div class="field">
+            <label for="returned">Returned orders</label>
+            <input id="returned" name="returned" type="text" inputmode="decimal" autocomplete="off" aria-describedby="returned-h returned-e">
+            <span class="hint" id="returned-h">Orders with at least one return.</span><span class="err" id="returned-e"></span>
+          </div>
+          <div class="field">
+            <label for="revenue">Revenue</label>
+            <input id="revenue" name="revenue" type="text" inputmode="decimal" autocomplete="off" aria-describedby="revenue-h revenue-e">
+            <span class="hint" id="revenue-h">Gross sales for the same orders.</span><span class="err" id="revenue-e"></span>
+          </div>
+          <div class="field">
+            <label for="refunds">Refunds</label>
+            <input id="refunds" name="refunds" type="text" inputmode="decimal" autocomplete="off" aria-describedby="refunds-h refunds-e">
+            <span class="hint" id="refunds-h">Total money refunded in the period.</span><span class="err" id="refunds-e"></span>
+          </div>
+          <div class="field">
+            <label for="cost">Average return cost</label>
+            <input id="cost" name="cost" type="text" inputmode="decimal" autocomplete="off" aria-describedby="cost-h cost-e">
+            <span class="hint" id="cost-h">Per returned order, excluding the refund: return shipping, handling, restocking, repackaging.</span><span class="err" id="cost-e"></span>
+          </div>
+        </div>
+
+        <h3 id="res-h">Results</h3>
+        <dl class="results" aria-labelledby="res-h">
+          <div><dt>Return rate</dt><dd id="out-rr">&mdash;</dd></div>
+          <div><dt>Refund rate</dt><dd id="out-fr">&mdash;</dd></div>
+          <div><dt>Cost of returns</dt><dd id="out-cr">&mdash;</dd></div>
+        </dl>
+        <p id="out-total" class="note"></p>
+        <p id="status" class="sr-only" role="status" aria-live="polite"></p>
+        <button type="reset" class="btn-reset">Clear</button>
+      </form>
+
+      <h2>How each number is calculated</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Result</th><th>Formula</th></tr></thead>
+          <tbody>
+            <tr><td>Return rate</td><td><code>returned orders &divide; total orders &times; 100</code></td></tr>
+            <tr><td>Refund rate</td><td><code>refunds &divide; revenue &times; 100</code></td></tr>
+            <tr><td>Cost of returns</td><td><code>returned orders &times; average return cost</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Return rate</strong> counts orders, so it says how often sales come back. <strong>Refund rate</strong> counts money, so it says how much revenue you gave back. The two can differ: if customers mostly return cheap items, the return rate can be high while the refund rate stays low.</p>
+      <p><strong>Cost of returns</strong> is the operating cost of handling returns and does <em>not</em> include the refund itself. The line under the results adds refunds and that cost to show the total money going out because of returns. Because your average return cost is an estimate, treat the result as a rough figure.</p>
+      <h3>Worked example</h3>
+      <p class="note">Made-up numbers, to show the arithmetic.</p>
+      <p>1,000 orders, 80 of them returned, revenue of 60,000, refunds of 4,200 and an average return cost of 6.50.</p>
+      <ul>
+        <li>Return rate: 80 &divide; 1,000 &times; 100 = <strong>8.0%</strong></li>
+        <li>Refund rate: 4,200 &divide; 60,000 &times; 100 = <strong>7.0%</strong></li>
+        <li>Cost of returns: 80 &times; 6.50 = <strong>520.00</strong></li>
+      </ul>
+
+      <h2>What these numbers do not tell you</h2>
+      <p>This page does not show industry benchmarks. Return rates vary widely by category, and an average from a different kind of store is rarely a fair comparison. A better yardstick is your own history, tracked period to period.</p>
+      <p>A rate also does not say <em>why</em> items come back. For that, group returns by product and reason: see <a href="/guides/shopify-return-reasons-analysis/">how to analyze Shopify return reasons</a>.</p>
+
+      <aside class="cta-box">
+        <h2>See the cause behind your return rate</h2>
+        <p>ReturnIQ reads your existing Shopify orders and returns, clusters the reasons, scores product risk and flags repeat returners. There is a free plan, and nothing to configure.</p>
+        <p><a class="btn" href="https://apps.shopify.com/returniq">Get it on Shopify</a></p>
+      </aside>
+
+      <h2>Related</h2>
+      <ul>
+        <li><a href="/guides/shopify-return-reasons-analysis/">How to analyze Shopify return reasons (find the real cause)</a></li>
+      </ul>
+    </article>
+  </main>
+  <footer class="foot">
+    <div class="wrap"><a href="https://apps.shopify.com/returniq">Shopify App Store</a><a href="https://shapehaveninnovations.com/">ShapeHaven Innovations</a><a href="https://shapehaveninnovations.com/returniq-privacy.html">Privacy policy</a><a href="/">ReturnIQ home</a><br><a href="https://shapehaveninnovations.com/">A Shapehaven Innovations product</a><br>&copy; 2026 ShapeHaven Innovations. ReturnIQ is made by ShapeHaven Innovations, the publisher of this page.</div>
+  </footer>
+  <script>
+    (function () {
+      var ids = ["orders", "returned", "revenue", "refunds", "cost"];
+      var el = {};
+      ids.forEach(function (id) { el[id] = document.getElementById(id); });
+      var out = { rr: document.getElementById("out-rr"), fr: document.getElementById("out-fr"), cr: document.getElementById("out-cr") };
+      var total = document.getElementById("out-total");
+      var status = document.getElementById("status");
+      var money = new Intl.NumberFormat(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      var DASH = "\u2014";
+
+      function read(id) {
+        var raw = el[id].value.trim().replace(/,/g, "");
+        if (raw === "") return { empty: true };
+        var n = Number(raw);
+        if (!isFinite(n) || n < 0) return { error: "Enter a number that is 0 or more." };
+        return { value: n };
+      }
+      function setErr(id, msg) {
+        document.getElementById(id + "-e").textContent = msg || "";
+        if (msg) el[id].setAttribute("aria-invalid", "true"); else el[id].removeAttribute("aria-invalid");
+      }
+      function pct(n) { return n.toFixed(1) + "%"; }
+
+      function update() {
+        var v = {};
+        ids.forEach(function (id) {
+          var r = read(id);
+          setErr(id, r.error);
+          v[id] = r;
+        });
+        if (v.returned.value !== undefined && v.orders.value !== undefined && v.returned.value > v.orders.value) {
+          setErr("returned", "Returned orders cannot be more than total orders.");
+          v.returned = { error: true };
+        }
+        if (v.refunds.value !== undefined && v.revenue.value !== undefined && v.refunds.value > v.revenue.value) {
+          setErr("refunds", "Refunds cannot be more than revenue.");
+          v.refunds = { error: true };
+        }
+        var rr = null, fr = null, cr = null;
+        if (v.orders.value > 0 && v.returned.value !== undefined) rr = v.returned.value / v.orders.value * 100;
+        if (v.revenue.value > 0 && v.refunds.value !== undefined) fr = v.refunds.value / v.revenue.value * 100;
+        if (v.returned.value !== undefined && v.cost.value !== undefined) cr = v.returned.value * v.cost.value;
+        out.rr.textContent = rr === null ? DASH : pct(rr);
+        out.fr.textContent = fr === null ? DASH : pct(fr);
+        out.cr.textContent = cr === null ? DASH : money.format(cr);
+        total.textContent = (cr !== null && v.refunds.value !== undefined && fr !== null)
+          ? "Refunds plus cost of returns: " + money.format(v.refunds.value + cr) + "."
+          : "";
+        status.textContent = "Return rate " + out.rr.textContent + ". Refund rate " + out.fr.textContent + ". Cost of returns " + out.cr.textContent + ".";
+      }
+
+      var form = document.getElementById("calc");
+      form.addEventListener("input", update);
+      form.addEventListener("submit", function (e) { e.preventDefault(); });
+      form.addEventListener("reset", function () { setTimeout(update, 0); });
+      update();
+    })();
+  </script>
+</body>
+</html>
